@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fullstock/Request.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,21 +36,33 @@ class _MyHomePageState extends State<MyHomePage> {
   static const OTOAZUL = 0XFF5DC1FF;
   static const COR_DO_AFRONOQUIO = 0XFFB37216;
   static const COR_DO_PINOQUIO = 0XFFFFBB5C;
-  static const List<String> TEST_REQUEST_LIST = [
-    'Pães',
-    'Leite',
-    'Queijo',
-    'Presunto',
-    'Margarina'
+  static List<Request> TEST_REQUEST_LIST = [
+    new Request('Pães', 8, 'u'),
+    new Request('Leite', 12, 'u'),
+    new Request('Queijo', 200, 'g'),
+    new Request('Presunto', 200, 'g'),
+    new Request('Margarina', 1, 'u'),
+    new Request('arroz', 1, 'kg'),
+    new Request('feijão', 1, 'kg'),
+    new Request('smudge', 1, 'u'),
+    new Request('egdums', 1, 'u')
   ];
 
-  List<Widget> generateRequestList(List<String> requestList) {
+  List<Widget> generateRequestList(List<Request> requestList) {
     List<Widget> containerList = new List();
 
-    containerList.add(Text('List of requests'));
+    containerList.add(Text(
+      'List of requests',
+      style: TextStyle(
+          color: Colors.white,
+          fontStyle: FontStyle.italic,
+          shadows: [Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))],
+          fontWeight: FontWeight.bold,
+          fontSize: 28),
+    ));
     containerList.add(SizedBox(height: 10.0));
 
-    for (String request in requestList) {
+    for (Request request in requestList) {
       containerList.add(
         Container(
           width: double.infinity,
@@ -70,29 +83,47 @@ class _MyHomePageState extends State<MyHomePage> {
             onLongPress: () {
               print("Smudge is my life");
             },
-            child: Row(children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: Colors.pink,
-                size: 24.0,
-                semanticLabel: 'heart icon',
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Text(
-                request,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic,
-                    shadows: [
-                      Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
-                    ],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28),
-              ),
-            ]),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(
+                    Icons.favorite,
+                    color: Colors.pink,
+                    size: 24.0,
+                    semanticLabel: 'heart icon',
+                  ),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  Container(
+                    width: 180.0,
+                    child: Text(
+                      request.title,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                          shadows: [
+                            Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
+                          ],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28),
+                    ),
+                  ),
+                  Text(
+                    request.quantity.toString() + ' ' + request.quantification,
+                    softWrap: true,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        shadows: [
+                          Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
+                        ],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )
+                ]),
           ),
         ),
       );
@@ -124,8 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
             colors: [Color(AZULZIN), Color(AZULAO)],
           )),
           padding: EdgeInsets.all(10.0),
-          child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: generateRequestList(TEST_REQUEST_LIST),
           ),
         ),
