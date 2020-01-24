@@ -14,8 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
-        '/': (context) =>
-            MyHomePage(title: 'Do you belive in the god savior smudge?'),
+        '/': (context) => MyHomePage(title: 'Fullstock Shopping app'),
       },
     );
   }
@@ -36,14 +35,21 @@ class _MyHomePageState extends State<MyHomePage> {
   static const OTOAZUL = 0XFF5DC1FF;
   static const COR_DO_AFRONOQUIO = 0XFFB37216;
   static const COR_DO_PINOQUIO = 0XFFFFBB5C;
+  static const List<String> TEST_REQUEST_LIST = [
+    'Pães',
+    'Leite',
+    'Queijo',
+    'Presunto',
+    'Margarina'
+  ];
 
-  List<Widget> generateContainerList() {
+  List<Widget> generateRequestList(List<String> requestList) {
     List<Widget> containerList = new List();
 
-    containerList.add(Text('list of columns'));
+    containerList.add(Text('List of requests'));
     containerList.add(SizedBox(height: 10.0));
 
-    for (int i = 0; i < 3; i++) {
+    for (String request in requestList) {
       containerList.add(
         Container(
           width: double.infinity,
@@ -64,16 +70,29 @@ class _MyHomePageState extends State<MyHomePage> {
             onLongPress: () {
               print("Smudge is my life");
             },
-            child: Row(
-              children: <Widget>[Text(
-                'COLUMN ' + i.toString(),
+            child: Row(children: <Widget>[
+              Icon(
+                Icons.favorite,
+                color: Colors.pink,
+                size: 24.0,
+                semanticLabel: 'heart icon',
+              ),
+              SizedBox(
+                width: 10.0,
+              ),
+              Text(
+                request,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    shadows: [
+                      Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
+                    ],
                     fontWeight: FontWeight.bold,
                     fontSize: 28),
-              ),]
-            ),
+              ),
+            ]),
           ),
         ),
       );
@@ -89,7 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Color(AZULAO),
       appBar: AppBar(
         backgroundColor: Color(OTOAZUL),
-        title: Text(widget.title + ' i belive you do'),
+        title: Text(widget.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white,
+                fontStyle: FontStyle.italic,
+                shadows: [Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))],
+                fontWeight: FontWeight.bold,
+                fontSize: 28)),
       ),
       body: Center(
         child: Container(
@@ -100,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.all(10.0),
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: generateContainerList(),
+            children: generateRequestList(TEST_REQUEST_LIST),
           ),
         ),
       ),
