@@ -75,8 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
             highlightColor: Color(COR_DO_AFRONOQUIO),
             splashColor: Color(COR_DO_AFRONOQUIO),
             textTheme: ButtonTextTheme.accent,
-            elevation: 12.0,
-            highlightElevation: 1.0,
+            elevation: 4.0,
+            highlightElevation: 0.0,
             onPressed: () {
               print("Smudge is my lord");
             },
@@ -152,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-            colors: [Color(AZULZIN), Color(AZULAO)],
+            colors: [Color(AZULAO), Color(AZULZIN), Colors.white],
           )),
           padding: EdgeInsets.all(10.0),
           child: ListView(

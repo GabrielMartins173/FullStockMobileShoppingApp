@@ -9,7 +9,7 @@ A new Flutter application.
  * Home Page   
 - [ ] main dinamic request list buttons with icon and variable title   
 - [ ] floating buttom to add a new request on the bottom right
-- [ ] scroll
+- [x] scroll
 * Request Creation Page   
 - [ ] create a link to a new page from the home page   
 - [ ] create the necessary fields to create a new request   
