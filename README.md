@@ -4,6 +4,8 @@ A new Flutter application.
 
 
 ##Backlog
+ *Technical 
+ - [ ] refactor folders so all the modules are not in the main file
  * Home Page   
 - [ ] main dinamic request list buttons with icon and variable title   
 - [ ] floating buttom to add a new request on the bottom right
