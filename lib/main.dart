@@ -71,7 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
             clipBehavior: Clip.hardEdge,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
-            color: Color.alphaBlend(Color(COR_DO_PINOQUIO), Color(AZULAO)),
+            color: Color(COR_DO_PINOQUIO),
+            animationDuration: Duration(seconds: 1),
+            colorBrightness: Brightness.dark,
             highlightColor: Color(COR_DO_AFRONOQUIO),
             splashColor: Color(COR_DO_AFRONOQUIO),
             textTheme: ButtonTextTheme.accent,
