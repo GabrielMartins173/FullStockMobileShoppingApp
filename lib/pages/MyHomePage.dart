@@ -18,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static List<Request> TEST_REQUEST_LIST = [
+  static List<Request> testRequestList = [
     new Request('Pães', 8, 'u', FoodIcons.BREAD),
     new Request('Leite', 12, 'u', FoodIcons.TEA),
     new Request('Queijo', 200, 'g', FoodIcons.CHEESE),
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Image.asset(
                     'icons/food/' + request.icon,
@@ -92,18 +92,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontSize: 28),
                     ),
                   ),
-                  Text(
-                    request.quantity.toString() + ' ' + request.quantification,
-                    softWrap: true,
-                    style: TextStyle(
-                        fontFamily: 'Righteous',
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic,
-                        shadows: [
-                          Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
-                        ],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                  Container(
+                    width: 60.0,
+                    child: Text(
+                      request.quantity.toStringAsFixed(0) +
+                          ' ' +
+                          request.quantification,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          fontFamily: 'Righteous',
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                          shadows: [
+                            Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
+                          ],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
                   ),
                 ]),
           ),
@@ -144,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.all(10.0),
           child: ListView(
             controller: ScrollController(initialScrollOffset: 0.0),
-            children: generateRequestList(TEST_REQUEST_LIST),
+            children: generateRequestList(testRequestList),
           ),
         ),
       ),
