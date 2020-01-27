@@ -9,7 +9,7 @@ class Request {
   double quantity;
   String quantification;
   double priority;
-  IconData icon;
+  String icon;
 
   Request(this.title, this.quantity, this.quantification, this.icon);
 }

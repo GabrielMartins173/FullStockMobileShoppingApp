@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fullstock/Request.dart';
+import 'package:fullstock/constants/FoodIcons.dart';
 
 import '../constants/FullStockColors.dart';
 
@@ -18,15 +19,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static List<Request> TEST_REQUEST_LIST = [
-    new Request('Pães', 8, 'u', Icons.favorite),
-    new Request('Leite', 12, 'u', Icons.sentiment_dissatisfied),
-    new Request('Queijo', 200, 'g', Icons.sentiment_very_satisfied),
-    new Request('Presunto', 200, 'g', Icons.sentiment_neutral),
-    new Request('Margarina', 1, 'u', Icons.sentiment_satisfied),
-    new Request('arroz', 1, 'kg', Icons.sentiment_satisfied),
-    new Request('feijão', 1, 'kg', Icons.sentiment_very_satisfied),
-    new Request('smudge', 1, 'u', Icons.sentiment_satisfied),
-    new Request('egdums', 1, 'u', Icons.sentiment_neutral)
+    new Request('Pães', 8, 'u', FoodIcons.BREAD),
+    new Request('Leite', 12, 'u', FoodIcons.TEA),
+    new Request('Queijo', 200, 'g', FoodIcons.CHEESE),
+    new Request('Presunto', 200, 'g', FoodIcons.CHEESE),
+    new Request('Margarina', 1, 'u', FoodIcons.BREAD),
+    new Request('arroz', 1, 'kg', FoodIcons.BREAD),
+    new Request('feijão', 1, 'kg', FoodIcons.CHEESE),
+    new Request('smudge', 1, 'u', FoodIcons.CHEESE),
+    new Request('egdums', 1, 'u', FoodIcons.TEA)
   ];
 
   List<Widget> generateRequestList(List<Request> requestList) {
@@ -51,12 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
             clipBehavior: Clip.hardEdge,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
-            color: Color(FullStockColors.COR_DO_PINOQUIO),
+            color: Color(FullStockColors.ACCENT),
             animationDuration: Duration(seconds: 1),
             colorBrightness: Brightness.dark,
-            highlightColor: Color(FullStockColors.COR_DO_AFRONOQUIO),
-            splashColor: Color(FullStockColors.COR_DO_AFRONOQUIO),
-            textTheme: ButtonTextTheme.accent,
+            highlightColor: Color(FullStockColors.LIGHT_ACCENT),
+            splashColor: Color(FullStockColors.LIGHT_ACCENT),
             elevation: 4.0,
             highlightElevation: 0.0,
             onPressed: () {
@@ -69,17 +69,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Icon(
-                    request.icon,
-                    //color: Colors.pink,
-                    size: 24.0,
-                    semanticLabel: 'icon',
+                  Image.asset(
+                    'icons/food/' + request.icon,
+                    scale: 10,
                   ),
                   SizedBox(
                     width: 10.0,
                   ),
                   Container(
-                    width: 180.0,
+                    width: 150.0,
                     child: Text(
                       request.title,
                       textAlign: TextAlign.left,
@@ -121,9 +119,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(FullStockColors.AZULAO),
+      backgroundColor: Color(FullStockColors.DARK_PRIMARY),
       appBar: AppBar(
-        backgroundColor: Color(FullStockColors.OTOAZUL),
+        backgroundColor: Color(FullStockColors.DARK_PRIMARY),
         title: Text(widget.title,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -138,8 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
           decoration: BoxDecoration(
               gradient: LinearGradient(
             colors: [
-              Color(FullStockColors.AZULAO),
-              Color(FullStockColors.AZULZIN),
+              Color(FullStockColors.PRIMARY),
+              Color(FullStockColors.LIGHT_PRIMARY),
               Colors.white
             ],
           )),
@@ -151,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Color(FullStockColors.PRIMARY),
           elevation: 8.0,
           highlightElevation: 1.0,
           onPressed: () {},

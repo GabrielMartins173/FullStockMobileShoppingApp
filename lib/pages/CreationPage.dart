@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fullstock/constants/FullStockColors.dart';
 
 class CreationPage extends StatefulWidget {
   final String title;
@@ -14,18 +15,12 @@ class CreationPage extends StatefulWidget {
 }
 
 class _CreationPageState extends State<CreationPage> {
-  static const AZULAO = 0XFF2E80B3;
-  static const AZULZIN = 0XFF75CAFF;
-  static const OTOAZUL = 0XFF5DC1FF;
-  static const COR_DO_AFRONOQUIO = 0XFFB37216;
-  static const COR_DO_PINOQUIO = 0XFFFFBB5C;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(AZULAO),
+      backgroundColor: Color(FullStockColors.DARK_PRIMARY),
       appBar: AppBar(
-        backgroundColor: Color(OTOAZUL),
+        backgroundColor: Color(FullStockColors.DARK_PRIMARY),
         title: Text(widget.title,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -41,7 +36,12 @@ class _CreationPageState extends State<CreationPage> {
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-              colors: [Color(AZULAO), Color(AZULZIN), Colors.white],
+              colors: [
+                Color(FullStockColors.DARK_PRIMARY),
+                Color(FullStockColors.PRIMARY),
+                Color(FullStockColors.LIGHT_PRIMARY),
+                Colors.white
+              ],
             )),
             padding: EdgeInsets.all(10.0),
           ),
