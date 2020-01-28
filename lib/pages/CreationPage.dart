@@ -6,10 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:fullstock/constants/FullStockColors.dart';
 
 class CreationPage extends StatefulWidget {
-  final String title;
-
-  CreationPage({Key key, this.title}) : super(key: key);
-
   @override
   _CreationPageState createState() => _CreationPageState();
 }
@@ -21,7 +17,7 @@ class _CreationPageState extends State<CreationPage> {
       backgroundColor: Color(FullStockColors.DARK_PRIMARY),
       appBar: AppBar(
         backgroundColor: Color(FullStockColors.DARK_PRIMARY),
-        title: Text(widget.title,
+        title: Text('pag2',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.white,

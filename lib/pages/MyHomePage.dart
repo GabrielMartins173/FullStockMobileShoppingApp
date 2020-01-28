@@ -7,6 +7,7 @@ import 'package:fullstock/Request.dart';
 import 'package:fullstock/constants/FoodIcons.dart';
 
 import '../constants/FullStockColors.dart';
+import 'CreationPage.dart';
 
 class MyHomePage extends StatefulWidget {
   final String title;
@@ -18,7 +19,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static List<Request> testRequestList = [
+  List<Request> requestList = [
     new Request('Pães', 8, 'u', FoodIcons.BREAD),
     new Request('Leite', 12, 'u', FoodIcons.TEA),
     new Request('Queijo', 200, 'g', FoodIcons.CHEESE),
@@ -29,97 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
     new Request('smudge', 1, 'u', FoodIcons.CHEESE),
     new Request('egdums', 1, 'u', FoodIcons.TEA)
   ];
-
-  List<Widget> generateRequestList(List<Request> requestList) {
-    List<Widget> containerList = new List();
-
-    containerList.add(Text(
-      'List of requests',
-      style: TextStyle(
-          color: Colors.white,
-          fontStyle: FontStyle.italic,
-          shadows: [Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))],
-          fontWeight: FontWeight.bold,
-          fontSize: 28),
-    ));
-    containerList.add(SizedBox(height: 10.0));
-    for (Request request in requestList) {
-      containerList.add(
-        Container(
-          width: double.infinity,
-          height: 70.0,
-          child: RaisedButton(
-            clipBehavior: Clip.hardEdge,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            color: Color(FullStockColors.ACCENT),
-            animationDuration: Duration(seconds: 1),
-            colorBrightness: Brightness.dark,
-            highlightColor: Color(FullStockColors.LIGHT_ACCENT),
-            splashColor: Color(FullStockColors.LIGHT_ACCENT),
-            elevation: 4.0,
-            highlightElevation: 0.0,
-            onPressed: () {
-              print("Smudge is my lord");
-            },
-            onLongPress: () {
-              print("Smudge is my life");
-            },
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Image.asset(
-                    'icons/food/' + request.icon,
-                    scale: 10,
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    width: 150.0,
-                    child: Text(
-                      request.title,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontFamily: 'Righteous',
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          shadows: [
-                            Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
-                          ],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28),
-                    ),
-                  ),
-                  Container(
-                    width: 60.0,
-                    child: Text(
-                      request.quantity.toStringAsFixed(0) +
-                          ' ' +
-                          request.quantification,
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          fontFamily: 'Righteous',
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          shadows: [
-                            Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
-                          ],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                    ),
-                  ),
-                ]),
-          ),
-        ),
-      );
-
-      containerList.add(SizedBox(height: 10.0));
-    }
-    containerList.add(SizedBox(height: 100.0));
-    return containerList;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.all(10.0),
           child: ListView(
             controller: ScrollController(initialScrollOffset: 0.0),
-            children: generateRequestList(testRequestList),
+            children: generateRequestList(requestList),
           ),
         ),
       ),
@@ -157,8 +67,122 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Color(FullStockColors.PRIMARY),
           elevation: 8.0,
           highlightElevation: 1.0,
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              requestList
+                  .add(new Request('new column', 0, 'x.', FoodIcons.BREAD));
+            });
+            /*Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreationPage()),
+            );*/
+          },
           child: Icon(Icons.add)),
+    );
+  }
+
+  List<Widget> generateRequestList(List<Request> requestList) {
+    List<Widget> containerList = new List();
+    containerList.add(Text(
+      'List of requests',
+      style: TextStyle(
+          color: Colors.white,
+          fontStyle: FontStyle.italic,
+          shadows: [Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))],
+          fontWeight: FontWeight.bold,
+          fontSize: 28),
+    ));
+    containerList.add(SizedBox(height: 10.0));
+    for (Request request in requestList) {
+      containerList.add(generateRequestContainer(request));
+
+      containerList.add(SizedBox(height: 10.0));
+    }
+    containerList.add(SizedBox(height: 100.0));
+    return containerList;
+  }
+
+  Container generateRequestContainer(Request request) {
+    return Container(
+      width: double.infinity,
+      height: 70.0,
+      child: RaisedButton(
+        shape:RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)),
+        padding: EdgeInsets.all(0),
+        clipBehavior: Clip.hardEdge,
+        color: Color(FullStockColors.ACCENT),
+        animationDuration: Duration(seconds: 1),
+        colorBrightness: Brightness.dark,
+        highlightColor: Color(FullStockColors.LIGHT_ACCENT),
+        splashColor: Color(FullStockColors.LIGHT_ACCENT),
+        elevation: 4.0,
+        highlightElevation: 0.0,
+        onPressed: () {
+          print("Smudge is my lord");
+        },
+        onLongPress: () {
+          setState(() {
+            requestList.remove(request);
+          });
+        },
+        child: Ink(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+          height: 70,
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              gradient: LinearGradient(colors: [
+                Color(FullStockColors.ACCENT),
+                Color(FullStockColors.LIGHT_ACCENT)
+              ])),
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Image.asset(
+                  'icons/food/' + request.icon,
+                  scale: 10,
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Container(
+                  width: 150.0,
+                  child: Text(
+                    request.title,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontFamily: 'Righteous',
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        shadows: [
+                          Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
+                        ],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28),
+                  ),
+                ),
+                Container(
+                  width: 60.0,
+                  child: Text(
+                    request.quantity.toStringAsFixed(0) +
+                        ' ' +
+                        request.quantification,
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        fontFamily: 'Righteous',
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        shadows: [
+                          Shadow(blurRadius: 2.0, offset: Offset(2.0, 2.0))
+                        ],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                ),
+              ]),
+        ),
+      ),
     );
   }
 }
